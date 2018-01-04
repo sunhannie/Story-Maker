@@ -1,0 +1,132 @@
+.theme-style {
+  border-color:#a7294d !important;
+}
+body #cmsMain {
+  background: #fff1e0; 
+}
+/*.top-bg { background: url(/styles/images/cms_01.gif) repeat-x;}*/
+.hint-style, .tag-wrap { 
+  border-left: 
+  5px solid #D2BFA5; 
+  background: #f6e9d8; 
+  position: relative;
+}
+.hint-style ul { 
+  padding: 10px 10px 10px 30px; 
+}
+.hint-style ul:before {
+  content: '“';
+  font-size: 40pt;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  color: #a7294d;
+  position: absolute;
+  top: 0;
+  left: 0;  
+}
+.tag-wrap { 
+  padding:10px; margin-bottom: 15px; 
+}
+#right_top_bg {
+  border-left: 1px solid #ccc;
+}
+.chinese-part {
+  border-top: 5px solid #a7294d; 
+}
+.english-part {
+  border-top: 5px solid #a7294d; 
+}
+.bottom_box { 
+  margin-top:10px;
+}
+label {
+  font-weight: 400;
+}
+.expandingArea {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff; 
+  min-height: 120px; 
+}
+.expandingArea pre, .expandingArea textarea {
+  margin: 0; 
+  padding: 0; 
+  outline: 0; 
+  border: 0;
+}           
+.expandingArea > textarea,
+.expandingArea > pre {
+  padding: 6px 12px;
+  background: transparent;
+  font: 400 14px/16px helvetica, arial, sans-serif;
+  /* Make the text soft-wrap */
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.expandingArea > textarea {
+/* The border-box box model is used to allow
+* padding whilst still keeping the overall width
+* at exactly that of the containing element.
+*/
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  /* This height is used when JS is disabled */
+  height: 100px;
+}
+.expandingArea.active > textarea {
+/* Hide any scrollbars */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  /* Remove WebKit user-resize widget */
+  resize: none;
+}
+.expandingArea > pre {
+  display: none;
+}
+.expandingArea.active > pre {
+  display: block;
+  /* Hide the text; just using it for sizing */
+  visibility: hidden;
+}                 
+.multiselect-container {
+  padding: 3px 20px 3px 40px;
+}
+.multiselect-container>.optgroup>.group>label.checkbox, .multiselect-container>.non-group>label.checkbox{
+  font-weight: bold;
+}
+.data-bind {
+  display: none;
+}
+.form-horizontal .form-group { 
+  margin-right: 0; 
+  margin-left: 0;
+}
+.gotoTop { 
+  background: #2e6e9e; 
+  display: inline-block; 
+  width: 60px; 
+  height: 60px; 
+  color: white; 
+  font-size: 40px;
+  text-align: center; 
+  border-radius: 31px; 
+  box-shadow: aliceblue; 
+  position: fixed; 
+  right: 10px; 
+  bottom: 20px; 
+  cursor: pointer;
+  display: none;
+}
+footer { 
+  padding: 20px; 
+  text-align: center; 
+  background: #e9decf;
+}  

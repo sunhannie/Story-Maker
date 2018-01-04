@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js show-items" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Story Maker</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/page-story.css -->
+    <link rel="stylesheet" href="styles/main-story-maker.css">
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <!-- endbuild -->
+ 
+
+
+  </head>
+  <body>
+    <form name='create_form' id='create_form' method='post' action='' class="form-horizontal">
+      <input type='hidden' id='id' name='id' value="">
+      <input type='hidden' id='back' name='back' value="">
+      <div id="right_top_bg">
+        <div class="container">
+          <div class="row">
+            <h1>Create Story</h1>
+          </div>
+           <div class="row">
+              <div class="form-group">
+                <label  class="col-sm-1 control-label">Publish Status:</label>
+                <div class="col-sm-2">
+                  <select id='publish_status' name='publish_status' class="form-control">
+                    <option value='queue' >as pending</option>
+                    <option value='draft' >as draft</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <input type="button" value="Submit" class="btn btn-primary btn-sm" onClick="javascript:autotemplate();checkfields('create_form');" />
+                  <input type='hidden' id='create' name='create' value='Y'>
+                  <input type='hidden' id='nw' name='nw' value=''>
+                  <input type='hidden' id='o' name='o' value=''>
+                  <input type='hidden' id='h' name='h' value=''>
+                  <input type="button" value="Cancel" class="btn btn-danger btn-sm" onClick="javascript: cancel_create('', '', '0', '');" />            
+                </div>
+                <div class="col-sm-6">
+                  <script>  var d = new Date();
+                    document.writeln('Your local time：'+d);
+                  </script><br/>
+                  System Date：22/07/2009
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</form>
+
+<!-- build:js scripts/innotree-maker.js -->
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+<!-- endbuild -->
+ <script>
+
+ </script>
+</body>
+</html>
