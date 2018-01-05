@@ -5,10 +5,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Story Maker</title>
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
     <!-- build:css styles/page-story.css -->
     <link rel="stylesheet" href="styles/main-story-maker.css">
     <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- endbuild -->
  
 
@@ -30,6 +31,7 @@
                   <select id='publish_status' name='publish_status' class="form-control">
                     <option value='queue' >as pending</option>
                     <option value='draft' >as draft</option>
+                    <option value='publish' >as publish</option>
                   </select>
                 </div>
                 <div class="col-sm-2">
@@ -50,13 +52,152 @@
             </div>
           </div>
         </div>
+        <div class="container" id="create_v_s_box_w">
+            <div class="row">
+              <div class="form-group">
+                <label class="col-md-1 control-label">Theme</label>
+                <div class="col-md-4 col-sm-6">
+                  <select class="form-control" id='quicktag' name="quicktag">
+                    <option value="" >Please Select</option>
+                    <option value="story">story</option>
+                    <option value="column">column</option>
+                    <option value="subscription">subscription</option>
+                  </select>
+                 </div>
+               </div>
+               <div class="form-group">
+                <label  class="col-sm-1 control-label">Date</label>
+                <div class="col-sm-6 date_box">
+                  <%html_select_date%>(Beijing Time)
+                </div>
+              </div>
+             </div>
+             <div class="row">
+              <div class="col-md-6 chinese-part">
+                <h3>CHINESE</h3>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label"><em>*</em>Headline</label>
+                  <div class="col-sm-8">
+                    <input class="form-control" type="text" id="cheadline" name="cheadline" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Skyline Headline</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="cskylineheadline"  class="form-control" name="cskylineheadline" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Skyline Text</label>
+                  <div class="col-sm-8">
+                    <textarea type="text" id="cskylinetext" class="form-control" name="cskylinetext" rows=4></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Long lead body</label>
+                  <div class="col-sm-8">
+                    <div class="expandingArea">
+                      <pre><span></span><br></pre>
+                      <textarea  id="clongleadbody" class="form-control" name="clongleadbody" rows="5"></textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Short lead body</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="cshortleadbody" class="form-control" name="cshortleadbody" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Byline title</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="cbyline_description" class="form-control" name="cbyline_description" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Author</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="cauthor" name="cauthor" class="form-control" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Location</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="cbyline_status" class="form-control" name="cbyline_status" value="" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 english-part">
+                <h3>ENGLISH</h3>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Headline</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="eheadline" class="form-control" name="eheadline" value="" placeholder="强制设置Ad Channel，仅新闻稿和教程有效）"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Skyline Headline</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="eskylineheadline"  class="form-control" name="eskylineheadline" value="" placeholder="(手动设置图辑和相册的高度）"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Skyline Text</label>
+                  <div class="col-sm-8">
+                    <textarea type="text" id="eskylinetext" class="form-control" name="eskylinetext" rows=4 placeholder="(手动设置相册的宽度)"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Long lead body</label>
+                  <div class="col-sm-8">
+                    <div class="expandingArea">
+                      <pre><span></span><br></pre>
+                      <textarea id="elongleadbody" class="form-control" name="elongleadbody" rows="5" placeholder="(手动设置相册底部页码的上限，比如上传了35个图片，但是一行只能显示18个页码)">1111111动设置相册底部页</textarea>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Short lead body</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="eshortleadbody" class="form-control" name="eshortleadbody" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Byline title</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="ebyline_description" class="form-control" name="ebyline_description" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Author</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="eauthor" name="eauthor" class="form-control" value="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Location</label>
+                  <div class="col-sm-8">
+                      <input type="text" id="ebyline_status" class="form-control" name="ebyline_status" value="<%$smarty.session.username%> [<%$smarty.now|date_format:'%Y-%m-%d %H:%M:%S'%>]" readonly />
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <textarea id=genre name=genre rows=4>上周，一份在网上流传的文件披露了10家中型银行在11月30日中国银行业协会</textarea>
+        <div id='tab'>
+        </div>
+        <div id='imgbutton' title="加图片">加图片</div>
+        <div id='content'>驱蚊器大舒服舒服</div>
+    
+        
 </form>
 
 <!-- build:js scripts/innotree-maker.js -->
   <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/jquery.js"></script>
+  <script src="/scripts/story-maker.js"></script>
 <!-- endbuild -->
- <script>
 
- </script>
 </body>
 </html>
