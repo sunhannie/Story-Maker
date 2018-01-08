@@ -252,6 +252,7 @@
             alertmessage += alerti + '. 中英文的段落数不一致，中文' + $('#cbody').val().replace(/\n$/gm, '').split(/\n/).length + '段，英文' + $('#ebody').val().replace(/\n$/gm, '').split(/\n/).length + "段\r\n\r\n";
             $('#ebody').css('background-color','#990000').css('color','#FFF');
         }
+        
         // 1. 中英文的段落数不一致，中文6段，英文3段
         console.log('cParaLen:'+cParaLen+ 'eParaLen:' +  eParaLen + 'alertmessage:'+ alertmessage);
     }
