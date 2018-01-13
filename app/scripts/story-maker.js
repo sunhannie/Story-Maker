@@ -18,7 +18,6 @@
             for (let tdkey in item) { 
                 tbodytd += '<td>'+item[tdkey]+'</td>';
             } 
-            
             tbodytd = tbodytd.replace(/^<td>/,'<td nowrap>');
             // console.log(index);
             tbodyTr +='<tr>'+tbodytd+'</tr>';
