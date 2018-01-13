@@ -18,6 +18,7 @@
             for (let tdkey in item) { 
                 tbodytd += '<td>'+item[tdkey]+'</td>';
             }
+            
             tbodytd = tbodytd.replace(/^<td>/,'<td nowrap>');
             // console.log(index);
             tbodyTr +='<tr>'+tbodytd+'</tr>';
@@ -189,54 +190,164 @@
         return compareText;
     }
     /**
-     * textarea获取光标所在段落
+     * textarea获取光标所在段落，并滚动到指定位置
+     * 当鼠标放在textArea中，计算出获得第几段文字，把此函数做成接口形式，以至于任何一个textArea都能捕捉到。
+     * 将光标相邻几个文字与文章每段文字匹配，根据匹配到的段落，获得第几段落指数，然后加亮另一个textArea中的对应段落。
+     * 检查获取的值是否都为空，应该加上判断
+     * 首先得先获取是定位到哪个标签，再检查另一个，没必要写成api
      */
-    function getParaIndexFromCaret(){
-        // var c = textObj.offset().top;
-        var cParaArr;
-        var eParaArr;
+    function getParaIndexFromCaret1(ele){
+        var paraArr;
         var compareText= '';
         var paraIndex= '';
+        var cbody = document.getElementById('cbody');
+        var ebody = document.getElementById('ebody');
+        paraArr=paragraphArray(ele)
+        
+        console.log('len'+eParaArr);
+        if(cParaArr.length>0){
+            cParaArr.forEach(function(item,i){ 
+            compareText= getTextCloseToCaret(ele,cParaArr[i]);
+                if (item.indexOf(compareText) > 0) {
+                    paraIndex = i;
+                }
+            });
+        }
+    }
+    function getParaIndexFromCaret(){
+        var paraArr=[]||'';
+        var paraArrFocus=[]||'';
+        var paraArrBlur=[]||'';
+        var cParaArr=[]||'';
+        var eParaArr=[]||'';
+        var compareText= '';
+        var paraIndex= '';
+        var bodyFocus;
+        var bodyBlur;
         var cbody = document.getElementById('cbody');
         var ebody = document.getElementById('ebody');
         cParaArr=$('#cbody').val().replace(/[\r\n]+ +[\r\n]+/gm,'\r\n').replace(/\n$/gm, '').split(/\n/);
         eParaArr=$('#ebody').val().replace(/[\r\n]+ +[\r\n]+/gm,'\r\n').replace(/\n$/gm, '').split(/\n/);
         console.log('len'+eParaArr);
-        cParaArr.forEach(function(item,i){ 
-            compareText= getTextCloseToCaret(cbody,cParaArr[i]);
-            if (item.indexOf(compareText) > 0) {
-                paraIndex = i;
-            }
-        });
-        console.log('paraIndex：'+paraIndex);
+        // 先获取焦点元素，然后把焦点元素赋值给一个公共的变量，把另一个没获取光标元素也赋值给另一个变量，这样逻辑只要求写一遍。
+        // 怎么获取光标元素呢？focus,e.target
+        // if (isCbodyFocus === true){
+        //     paraArrFocus = cParaArr;
+        //     paraArrBlur = eParaArr;
+        //     bodyFocus = cbody
+        //     bodyBlur = ebody
+        // }
+        // if (isEbodyFocus === true){
+        //     paraArrFocus = eParaArr;
+        //     paraArrBlur = cParaArr;
+        //     bodyFocus = ebody
+        //     bodyBlur = cbody
+        // }
+        // if(paraArrFocus.length>0){
+        //     paraArrFocus.forEach(function(item,i){ 
+        //     compareText= getTextCloseToCaret(bodyFocus,paraArrFocus[i]);
+        //         if (item.indexOf(compareText) > 0) {
+        //             paraIndex = i;
+        //         }
+        //     });
+        // }
+        
+        // console.log('paraIndex：'+paraIndex);
+        // let eSelectedPara = paraArrBlur[paraIndex];
+        // console.log('Caret text：'+eSelectedPara);
+        // let eLength = eSelectedPara.length;
+        // paraArrBlur.forEach(function(item,i){ 
+        //     compareText= getTextCloseToCaret(bodyFocus,cParaArr[i]);
+        //     if (item.indexOf(compareText) > 0) {
+        //         paraIndex = i;
+        //     }
+        // });
+        // let frontLength = 0;
+        // for (var i = 0; i < paraIndex; i++) {
+        //     frontLength += paraArrBlur[i].length;
+        // }
+        // bodyBlur.focus();
+        // bodyBlur.setSelectionRange(frontLength,frontLength+eLength);
+
+        if(cParaArr.length>0){
+            console.log('paraIndex：'+cParaArr);
+            cParaArr.forEach(function(item,i){ 
+                compareText= getTextCloseToCaret(cbody,cParaArr[i]);
+                console.log(i+'paraIndex：'+compareText);
+                if (item.indexOf(compareText) > 0) {
+                    paraIndex = i;   
+                }
+            });
+        }
+        
         let eSelectedPara = eParaArr[paraIndex];
-        console.log('Caret text：'+eSelectedPara);
-        let eLength = eSelectedPara.length;
+        let eLength = 0;
+        // let eLength = eSelectedPara.length;
         eParaArr.forEach(function(item,i){ 
             compareText= getTextCloseToCaret(cbody,cParaArr[i]);
             if (item.indexOf(compareText) > 0) {
                 paraIndex = i;
             }
         });
+        
         let frontLength = 0;
         for (var i = 0; i < paraIndex; i++) {
             frontLength += eParaArr[i].length;
         }
         ebody.focus();
         ebody.setSelectionRange(frontLength,frontLength+eLength);
-        // return paraIndex 
+        return paraIndex 
     } 
     /**
      * textarea滚动到指定位置
      * 思路：获取一个textarea鼠标位置，得到第几段指数，然后获取另一个textarea对应段，然后加亮。
      * 怎么加亮textarea中文本？直接选中那段，把光标定位到那段，光标前后为段落前长度+被选段落长度
      */
+    var isCbodyFocus = false;
+    var isEbodyFocus = false;
+    $('#cbody').focus(function(){
+        console.log('cbody获得焦点'+document.activeElement.id);
+         isCbodyFocus = true;
+         isEbodyFocus = false;
+        //  getParaIndexFromCaret();
+    });
+    $('#ebody').focus(function(){
+        console.log('ebody获得焦点'+document.activeElement.id);
+         isEbodyFocus = true;
+         isCbodyFocus = false;
+        //  getParaIndexFromCaret();
+    });
+    // var ele = document.getElementById('cbody');
+    // ele.onfocus = function(){
+    //     console.log('txt2获得焦点'+document.activeElement.id);
+    // }
     function scrollToSpecifiedText(){
         // var paraIndex = getParaIndexFromCaret();
-
+        if(document.activeElement.id=='cbody'){
+                alert('txt2获得焦点');
+            }
+            else{
+                alert('txt2未获得焦点');
+        }
+        
+        
+    }
+    // scrollToSpecifiedText()
+    /**
+     * 获取textarea内容每段落组成的数组
+     */
+    function paragraphArray(ele){
+        var ele = document.getElementById(ele);
+        if (ele.innerHTML){
+            var value = ele.innerHTML;
+            var paraArray = value.replace(/[\r\n]+ +[\r\n]+/gm,'\r\n').replace(/\n$/gm, '').split(/\n/);
+            console.log('paraArray'+paraArray);
+        }
+        
+        return paraArray;
     }
     /**
-     * textarea计算段落总数
+     * 计算textarea内容段落总数
      */
     function paragraphCount(){
         var alertmessage=''; 
@@ -261,7 +372,9 @@
         console.log('#imgbutton'+c);
         paragraphCount();
         getParaIndexFromCaret();
-        
+        // var ele1 = document.getElementById('cbody');
+        // var value = ele1.innerHTML;
+        // paragraphArray('cbody')
     });
     // $('#content').mouseup(function(e){ 
         // selectContents('content');
