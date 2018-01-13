@@ -13,7 +13,6 @@
         theadNode ='<thead><tr>'+theadTh+'</span></tr></thead>';
 
         var tbodyTr = '';
-        
 
         obj.tbody.forEach(function(item){ 
             var tbodytd = '';
