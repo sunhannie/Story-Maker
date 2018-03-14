@@ -1,0 +1,91 @@
+<!doctype html>
+<html class="no-js show-items" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSS</title>
+
+
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+ <style type="text/css"> 
+.trans_list {
+    width: 10%;
+    height: 64px;
+    margin:10px 0;
+    background-color:#486AAA;
+    color:#fff;
+    text-align:center;
+}
+.ease {
+    -webkit-transition: all 4s ease;
+    -moz-transition: all 4s ease;
+    -o-transition: all 4s ease;
+    transition: all 4s ease;
+}
+.ease_in{
+
+    transition: all 4s ease-in;
+}
+.ease_in_out {
+    -webkit-transition: all 4s ease_in_out;;
+    -moz-transition: all 4s ease_in_out;;
+    -o-transition: all 4s ease_in_out;;
+    transition: all 4s ease_in_out;
+}
+.ease_out{
+    -webkit-transition: all 4s ease_out;
+    -moz-transition: all 4s ease_out;
+    -o-transition: all 4s ease_out;
+    transition: all 4s ease_out;
+}
+.linear{
+    -webkit-transition: all 4s linear;
+    -moz-transition: all 4s linear;
+    -o-transition: all 4s linear;
+    transition: all 4s linear;
+}
+.ease_in:hover{
+    margin-left:89%;
+    background-color:#BECEEB;
+    color:#333;
+    border-radius:25px;        
+    transform: rotate(360deg);            
+}
+.anim_fade_image {
+    position:absolute;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+.anim_fade_image:hover{
+    opacity:0;
+    filter: alpha(opacity=0);
+}
+</style>
+
+
+  </head>
+  <body>
+    <div id="transBox" class="trans_box">
+    <div class="trans_list ease">ease</div>
+    <div class="trans_list ease_in">ease-in</div>
+    <div class="trans_list ease_out">ease-out</div>
+    <div class="trans_list ease_in_out">ease-in-out</div>
+    <div class="trans_list linear">linear</div>
+</div>
+
+
+<img class="anim_fade_image" src="http://image.zhangxinxu.com/image/study/p/s200/ps6.jpg" />
+<img src="http://image.zhangxinxu.com/image/study/p/s200/ps4.jpg" />
+ 
+
+ <script>
+
+
+ </script>
+</body>
+</html>

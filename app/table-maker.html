@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Table-maker</title>
+
+
+    <link rel="stylesheet" href="../bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+     <style type="text/css"> 
+        .trans_list {
+            width: 10%;
+            height: 64px;
+            margin:10px 0;
+            background-color:#486AAA;
+            color:#fff;
+            text-align:center;
+        }
+
+     </style>
+
+  </head>
+  <body>
+
+    <div id="contanier" class="contanier">
+        <div class="title">
+            <input type="text" value="标题" id="titleId"/>
+        </div>
+        <div class="rowNum">
+            <label>行数</label>
+            <input type="text" value="0" id="rowId"/>
+            <input type="checkbox" name="rowNumber" value="rowNumber" />
+        </div>
+        <div class="columnNum">
+            <label>列数</label>
+            <input type="text" value="1" id="columnId"//>
+            <input type="checkbox" name="columnNumber" value="columnNumber" />
+        </div>
+        <button id='makeBtn'>生成表格</button>
+        
+         <div><button id='codeId'>生成代码</button></div>
+        <div><textarea row=3 id='getCodeId'></textarea>  </div>
+        <div id='tableId'><div>
+
+    </div>
+
+ <script>
+    var titleId = document.getElementById('titleId');
+    var rowId = document.getElementById('rowId');
+    var columnId = document.getElementById('columnId');
+    var makeBtnId = document.getElementById('makeBtn');
+    var tableId = document.getElementById('tableId');
+    var codeId = document.getElementById('codeId');
+    var getCodeId = document.getElementById('getCodeId');
+    var titleV = '';
+    var rowV = '';
+    makeBtnId.onclick = function(){
+         titleV = titleId.value;
+         rowV = rowId.value;
+        var columnV = columnId.value;
+        
+        var captionHtml = '<caption>'+ titleV+'</caption>'
+
+        var trHtml = '';
+        var colHtml = ''
+        //先循环每列，再循环每行
+        
+        if (Number(columnV)>0){
+             // 一整行显示value="' + id + '"
+            for(let i=0;i<columnV;i++){
+                    trHtml +=' <input type="text" value="" class="col' + i + ' " colN="col-' + i + ' "  /><input type="checkbox" name="isMerge" value="isMerge" />'
+             }
+            // trHtml = '<div>'+ trHtml+'</div>'
+        }
+        if (Number(rowV)>0){
+            // 几行显示
+            for(let j=0;j<rowV;j++){
+                colHtml+='<div  rowN="row-' + j + ' " >'+ trHtml+'</div>'
+                // colHtml+=trHtml;
+            }
+        }
+
+        console.log(trHtml);
+        tableId.innerHTML = colHtml;
+        // <table><caption>'+ obj.caption+'</caption>'+theadNode+tbodyNode+'</table>
+    }
+
+    codeId.onclick = function(){
+        console.log('1');
+        for(let j=0;j<rowV;j++){
+            for(let i=0;i<columnV;i++){
+                // 先获取元素，再获取值
+                // testEle.getAttribute("colN")； 
+                // testEle.attributes["test"].nodeValue; 
+            }
+        }
+    }
+
+/*思路：应该分成是否有合并单元格2种情况
+1. 先创建有输入内容的地方
+2. 把每行的内容提取出来，根据id号提取内容，比如id1放入第1行，依次idi放入第i行，列也取个id
+3. 根据相邻复选框是否选择来决定是否合并，
+上下（行id不一样）、左右比较（列id不一样）
+根据第一个被选中来决定添加属性，用第一个来跟上下和左右对比，
+4. 计算出有内容的下面单元格没有内容的个数，应该把这个值保存下来；然后对有内容的那个添加rowspan="个数+1"；对没有内容的不加td单元格。
+5. 用什么循环(怎么取到单元格？)：循环属性
+*/
+ </script>
+</body>
+</html>
