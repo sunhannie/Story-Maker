@@ -385,4 +385,7 @@
     /**链接打开本地excel或者word */ 
     // b = $(this).scrollTop();   //页面滚动的高度  
     // c = group.offset().top;    //元素距离文档（document）顶部的高度 
+
+
+
 })();
