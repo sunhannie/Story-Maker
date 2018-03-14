@@ -72,7 +72,7 @@
         if (Number(columnV)>0){
              // 一整行显示value="' + id + '"
             for(let i=0;i<columnV;i++){
-                    trHtml +=' <input type="text" value="3" coln="col-' + i + '"  /><input type="checkbox" name="isMerge" value="isMerge" />'
+                    trHtml +=' <input type="text" value="文字' + i + '" coln="col-' + i + '"  />'
              }
             // trHtml = '<div>'+ trHtml+'</div>'
         }
@@ -90,42 +90,135 @@
     }
 
     codeId.onclick = function(){
-        // var rown = GetAttrElement("rown","row-1");
-        // var coln = GetAttrElement("coln","col-1");
-        // var rownChild = rown[0].firstChild.nodeName;
+        var rowNB = Number(rowV);
+        var columnNB = Number(columnV);
         var rownArr = [];
         var rownChildArr = [];
-        for(let j=0;j<rowV;j++){
-            // for(let i=0;i<columnV;i++){
-                // 先获取元素，再获取值
-                // testEle.getAttribute("colN")； 
-                // testEle.attributes["test"].nodeValue; 
-                // var rown = GetAttrElement("rown","row-0");
-
-            // }
-            rownArr[j] = GetAttrElement("rown","row-"+ j )[0];
-            // rownArr.push(GetAttrElement("rown","row-"+ j ));
-            rownChildArr[j] = rownArr[j].children[0];
-            // rownChildArr.push(rownArr[j].children[0]);
+        var objPerRow = {};
+        var objArr = [];
+        var objArrs = [];
+        for(let j=0;j<rowNB;j++){
+             // 先获取元素，再获取值
+            rownArr[j] = GetAttrElement("rown","row-"+ j )[0];   //行数
+            // rownChildArr包含了每行的所有子，有几列就有几个子
         }
-         for(let j=0;j<rowV;j++){
-            // rownChildArr[j] = rownArr[j].firstChild
+        // 得到每行每列的值
+         for(let j=0;j<rowNB;j++){
+              objArr=[];
+               for(let i=0;i<columnNB;i++){
+                    objPerRow['r-'+j+'-c-'+i]=rownArr[j].children[i].value;
+                    objArr.push(rownArr[j].children[i].value)
+               }
+               objArrs[j] = objArr;
          }
-        console.log('1：'+rownArr.length+'-- 2：'+rownChildArr);
-        console.log(rownChildArr[1].value);
+         console.log(objArrs);
+         var emptyNum = 0;
+
+         for(let r=0;r<rowNB;r++){
+             emptyNum = 0;
+             for(let c=0;c<columnNB;c++){
+            // 只是统计了每行有几种这种情况
+                     if (objArrs[r][c]!==''&&objArrs[r][c+1]=='') {
+                        
+                     }
+                     getEmptyIndex(objArrs[r]);
+                     getEmptyCount(objArrs[r])
+
+               } 
+               console.log('emptyNum:'+emptyNum)
+          }
+
+// 列
+         // for(let r=0;r<rowNB;r++){
+         //       for(let c=0;c<columnNB;c++){
+         //             if (objArrs[r][c]==objArrs[r][c+1]){
+         //                emptyNum++;
+         //             }
+         //       } 
+         //       console.log('emptyNum:'+emptyNum)
+         //  }
+
+         // var diff = Math.abs(columnNB-rowNB);
+         // var divHtml= '<div>nihao</div>';
+         
+         // // 得到每行每列的值
+         // for(let j=0;j<rowNB;j++){
+         //       // emptyNum = 0;
+         //       for(let i=0;i<columnNB;i++){
+         //            // console.log(objArr[j*rowNB+i]);
+         //            if (rowNB==columnNB){
+         //                console.log(j*rowNB+i);
+         //            }else if(rowNB<columnNB){
+         //                // j*(rowNB+diff)+i
+         //                // 获取值连续为空的个数
+         //                if((objArr[j*(rowNB+diff)+i]!='')&&(objArr[(j+1)*(rowNB+diff)+i]=='')){
+                            
+         //                    emptyNum++;
+         //                    // console.log(j*rowNB+i+j*diff+'---number:'+emptyNum);
+         //                    // divHtml+=<td rowspan="3" >合作研发</td>
+         //                }else{
+         //                    // console.log('j*rowNB+i+j*diff');
+         //                }
+         //            }else{
+         //                if((objArr[j*columnNB+i])&&(objArr[(j+1)*columnNB+i])){
+         //                    // console.log(j*columnNB+i);
+         //                }
+                        
+         //            } 
+
+         //       }
+                
+         // }
+ 
+        
     }
 
-    function GetAttrElement(attr,val){
-        var e= document.all;
-        var a= new Array();
-        for(var i=0;i<e.length;i++){
-            if(e[i].getAttribute(attr)==val){
-                a.push(e[i])
-            }
+function GetAttrElement(attr,val){
+    var e= document.all;
+    var a= new Array();
+    for(var i=0;i<e.length;i++){
+        if(e[i].getAttribute(attr)==val){
+            a.push(e[i])
         }
-        // console.log(e);
-        return a;
     }
+    return a;
+}
+function getEmptyIndex(arr){
+   
+    var len = arr.length;
+    var indexArr = [];
+    var tempIndex = '0';
+     for(var i=0;i<len;i++){
+         tempIndex = '0';
+             for(let k=i+1;k<len;k++){
+                if(arr[i]!==''&&(arr[k]==''||arr[k]=="")){
+                    tempIndex = i;
+                }else{
+                    break;
+                }
+             }
+             if (tempIndex!=='0'){
+                indexArr.push(tempIndex)
+             }
+       }
+       console.log('k:'+indexArr)
+}
+var arr = ["文字2", "", "文字2", "", "文字4", "文字5", "文字6"]
+// var arr = ['a','','','','b','',''];
+getEmptyIndex(arr);
+function getEmptyCount(arr){
+    var len = arr.length;
+    var countArr = [];
+    var diff = 0;
+    for(var i=0,j=i+1;i<len,j<len;i++,j++){
+            diff = arr[j]-arr[i];
+            countArr.push(diff);  
+    }
+    console.log('countArr:'+countArr)
+}
+ // var arr1 = ["", "", "文字2", "文字3", "文字4", "文字5", "文字6"]
+ var arr1 = [1,5,8,14];
+getEmptyCount(arr1);
 
 /*思路：应该分成是否有合并单元格2种情况
 1. 先创建有输入内容的地方
@@ -137,6 +230,12 @@
 5. 用什么循环(怎么取到单元格？)：循环属性
 6.先循环行，再循环列，把里面所有单元格的文字取出来，做成json，键值对的形式（键为行+列）
 7.最后面分析json数据
+        // var rown = GetAttrElement("rown","row-1");
+        // var coln = GetAttrElement("coln","col-1");
+        // var rownChild = rown[0].firstChild.nodeName;
+// rownArr.push(GetAttrElement("rown","row-"+ j ));
+// rownChildArr.push(rownArr[j].children[0]);
+ // rownChildArr[j] = rownArr[j].children     //列数
 */
  </script>
 </body>
