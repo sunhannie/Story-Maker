@@ -57,10 +57,11 @@
     var getCodeId = document.getElementById('getCodeId');
     var titleV = '';
     var rowV = '';
+    var columnV = '';
     makeBtnId.onclick = function(){
          titleV = titleId.value;
          rowV = rowId.value;
-        var columnV = columnId.value;
+         columnV = columnId.value;
         
         var captionHtml = '<caption>'+ titleV+'</caption>'
 
@@ -71,32 +72,59 @@
         if (Number(columnV)>0){
              // 一整行显示value="' + id + '"
             for(let i=0;i<columnV;i++){
-                    trHtml +=' <input type="text" value="" class="col' + i + ' " colN="col-' + i + ' "  /><input type="checkbox" name="isMerge" value="isMerge" />'
+                    trHtml +=' <input type="text" value="3" coln="col-' + i + '"  /><input type="checkbox" name="isMerge" value="isMerge" />'
              }
             // trHtml = '<div>'+ trHtml+'</div>'
         }
         if (Number(rowV)>0){
             // 几行显示
             for(let j=0;j<rowV;j++){
-                colHtml+='<div  rowN="row-' + j + ' " >'+ trHtml+'</div>'
+                colHtml+='<div  rown="row-' + j + '" >'+ trHtml+'</div>'
                 // colHtml+=trHtml;
             }
         }
 
-        console.log(trHtml);
+        
         tableId.innerHTML = colHtml;
         // <table><caption>'+ obj.caption+'</caption>'+theadNode+tbodyNode+'</table>
     }
 
     codeId.onclick = function(){
-        console.log('1');
+        // var rown = GetAttrElement("rown","row-1");
+        // var coln = GetAttrElement("coln","col-1");
+        // var rownChild = rown[0].firstChild.nodeName;
+        var rownArr = [];
+        var rownChildArr = [];
         for(let j=0;j<rowV;j++){
-            for(let i=0;i<columnV;i++){
+            // for(let i=0;i<columnV;i++){
                 // 先获取元素，再获取值
                 // testEle.getAttribute("colN")； 
                 // testEle.attributes["test"].nodeValue; 
+                // var rown = GetAttrElement("rown","row-0");
+
+            // }
+            rownArr[j] = GetAttrElement("rown","row-"+ j )[0];
+            // rownArr.push(GetAttrElement("rown","row-"+ j ));
+            rownChildArr[j] = rownArr[j].children[0];
+            // rownChildArr.push(rownArr[j].children[0]);
+        }
+         for(let j=0;j<rowV;j++){
+            // rownChildArr[j] = rownArr[j].firstChild
+         }
+        console.log('1：'+rownArr.length+'-- 2：'+rownChildArr);
+        console.log(rownChildArr[1].value);
+    }
+
+    function GetAttrElement(attr,val){
+        var e= document.all;
+        var a= new Array();
+        for(var i=0;i<e.length;i++){
+            if(e[i].getAttribute(attr)==val){
+                a.push(e[i])
             }
         }
+        // console.log(e);
+        return a;
     }
 
 /*思路：应该分成是否有合并单元格2种情况
@@ -107,6 +135,8 @@
 根据第一个被选中来决定添加属性，用第一个来跟上下和左右对比，
 4. 计算出有内容的下面单元格没有内容的个数，应该把这个值保存下来；然后对有内容的那个添加rowspan="个数+1"；对没有内容的不加td单元格。
 5. 用什么循环(怎么取到单元格？)：循环属性
+6.先循环行，再循环列，把里面所有单元格的文字取出来，做成json，键值对的形式（键为行+列）
+7.最后面分析json数据
 */
  </script>
 </body>
