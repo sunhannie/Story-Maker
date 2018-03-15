@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+    <title>知乎</title>
+    <style>
+
+.scorechart-container {
+    width: 180px;
+    height: 180px;
+    margin: 30px auto;
+    position: relative;
+    display: table;
+}
+#svg #dash {
+    stroke: #F6E9D8;
+}
+#score-chart {
+    margin: auto;
+    width: 180px;
+    height: 180px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#svg circle {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+    stroke: #666;
+    stroke-width: 1em;
+}
+ p.final-score {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #09a25c;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    line-height: 116%;
+}
+    </style>
+</head>
+
+<body>
+<div class="scorechart-container">
+    <div id="score-chart"><svg id="svg" width="180" height="180" viewport="0 0 180 180" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle id="dash" r="72" cx="90" cy="90" fill="transparent" stroke-dasharray="452.394" stroke-dashoffset="0"></circle><circle id="bar" r="72" cx="90" cy="90" fill="transparent" stroke-dasharray="452.394" stroke-dashoffset="0" style="stroke-dashoffset: 303.101px; stroke: rgb(244, 76, 76);"></circle></svg></div>
+    <p class="final-score" style="color: rgb(244, 76, 76);">33%</p>
+</div>
+
+<!--<div class="pie">20%</div>
+<div class="pie">60%</div>
+<div class="pie animated">0%</div>-->
+<script src="./scripts/animate.js"></script>
+</body>
+
+</html>
