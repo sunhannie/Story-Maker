@@ -65,6 +65,35 @@
     opacity:0;
     filter: alpha(opacity=0);
 }
+
+
+
+    .divcss5{
+        width:400px;
+        border: 1px solid red;
+        background:#FF0;
+    }     
+    .divcss5_left{
+        width: 180px;
+        height: 100px;
+        border: 1px solid red;
+        float:left;
+        background-color: blue;
+    } 
+    .divcss5_right{
+        width: 180px;
+        height: 100px;
+        border: 1px solid red;
+        float:right;
+        background-color: yellowgreen;
+    } 
+    .clear{
+        clear:both;
+    }
+
+    .divcss5{width:400px;border:1px solid #F00;background:#FF0;overflow:hidden} 
+    /*.clearfloat :after { display:block; clear:both; content:"";visibility:hidden; height:0} 
+    .clearfloat{zoom:1} */
 </style>
 
 
@@ -78,6 +107,12 @@
     <div class="trans_list linear">linear</div>
 </div>
 
+
+    <div class="divcss5">
+        <div class="divcss5_left">左浮动</div>
+        <div class="divcss5_right">右浮动</div>
+        <div class="clear"></div>
+    </div>
 
 <img class="anim_fade_image" src="http://image.zhangxinxu.com/image/study/p/s200/ps6.jpg" />
 <img src="http://image.zhangxinxu.com/image/study/p/s200/ps4.jpg" />
